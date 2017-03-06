@@ -1,0 +1,31 @@
+/* add style rules here to customize or adjust the MDL styles */
+.mdl-layout {
+/*    background: url("../img/background.jpg") center / cover;*/
+}
+
+.mdl-layout__header-row {
+    background-color:cadetblue;
+}
+
+.mdl-cell .mdl-card {
+    width:100%;
+}
+
+.mdl-card__media img {
+  width:100%;
+}
+
+.mdl-card__title h2 {
+    color:black;
+}
+
+/*
+* {
+    color:black;
+}
+
+.mdl-navigation__link {
+    color:black;
+}
+*/
+
