@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+<script src="http://code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+<link rel="stylesheet" href="css/style.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<style type="text/css">
+
+body {
+	font: 11px;
+}
+
+header{
+  height: 30px;
+  padding-top: 70px;
+  padding-bottom: 70px;
+  background-color: #fff;
+  margin-bottom: 50px;
+}
+
+
+header p{
+  margin:2px 0 2px 50px;
+}
+
+
+header h1{
+  font-size: 1.5em;
+  margin-left: 50px;
+  margin-top: 0;
+  line-height: 25px;
+}
+
+#break{
+  margin-top: -10px;
+  width:60px;
+  height:7px;
+  background-color: #333232;
+  margin-left: 50px;
+  margin-bottom: 6px;
+}
+
+.canvas{
+	display: inline-block;
+}
+
+
+#controls{
+	display: block;
+}
+
+.subcontrol{
+  margin-top: 10px;
+  margin-bottom: 10px;
+  display: inline-block;
+  margin-left: 50px;
+}
+
+#scatter{
+ margin-left:50px; 
+ padding-left:60px; 
+ padding-top:20px;
+}
+
+.axis line,
+.axis text {
+ font: 11px sans-serif;
+}
+.axis path {
+ fill: none;
+ stroke: #000;
+ shape-rendering: crispEdges;
+}
+
+
+.tooltip{
+ position: absolute;
+ text-align: left;
+ width: 150px;
+ height: 100px;
+ padding: 4px;
+ margin-top: -20px;
+ margin-left: -10px;
+ font: 10px sans-serif;
+ pointer-events: none;
+ background-color: #fff;
+ box-shadow: 2px 2px 2px #828282;
+ border-radius: 10px;
+}
+
+#tooltipscatter{
+  width: 220px;
+  height: 120px;
+}
+
+circle{
+  transition:r .8s, cx 1s, cy 1s;
+}
+
+circle:hover{
+  r: 10px;
+}
+
+rect.bar{
+  transition: y 1s,height 1s;
+}
+
+rect.bar:hover{
+  opacity: .9;
+}
+
+
+.tick line{
+  stroke:#efefef;
+  opacity: .7;
+
+}
+
+label{
+  font-size: 16px;
+  font-weight: 700;
+}
+
+svg{
+ margin: 10px 10px;
+}
+
+input[type=radio]:hover{
+  cursor: pointer;
+}
+
+/*new*/
+
+.filters{
+  margin-top: 10px;
+}
+
+.filters input[type="radio"] {
+  display: none;
+}
+
+.filters label {
+  display: inline-block;
+  background-color: #e8e8e8;
+  color: #515151;
+  padding: 2px 8px;
+  font-family: Arial;
+  font-size: 12px;
+  font-weight: 200;
+  cursor: pointer;
+  transition:all .3s;
+}
+
+.filters label:hover {
+  background-color:#6f7070;
+  color: #fff;
+/*  padding: 2px 8px;
+  font-family: Arial;*/
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.filters input[type="radio"]:checked+label {
+  background-color: #6f7070;
+  color: #fff;
+}
+
+.container{
+  margin-left: 30px;
+  line-height: 1.5em;
+  margin-top: 20px;
+}
+
+</style>
+<body>
+  <nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">LGBTQ</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li ><a href="index.html">Home</a></li>
+        <li><a href="#">Tweet Map</a></li>
+        <li class="active"><a href="viz.html">Data Viz</a></li>
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+  </nav>
+
+  <header>
+    <H1>Is it a Man's World? Socioeconomic Characteristics of <BR>Same-sex Couples vs. Opposite-sex Couples in the US</H1>
+    <div id="break"></div>
+    <p>Data source: American Community Survey Data on Same Sex Couples, 2015-2014, U.S. Census Bureau. <a href="http://www.census.gov/hhes/samesex/data/acs.html">(View raw data)</a></p>
+    <p style="line-height:3px;">Designed and coded by Xuan Liu</p>
+  </header>
+
+  <div class="viz">
+    <div class="canvas">
+     <svg id="bars" width="500" height="400"></svg>
+   </div>
+   <div class="canvas">
+     <svg id="scatter" width="500" height="400"></svg>
+   </div>
+   <div id="controls">
+    <div class="subcontrol">
+      <label for="type">Year:</label>
+      <div class="filters">
+        <form id="selectyear">
+          <input type="radio" id="radio1" name="year" value="2014" checked>
+          <label for="radio1">2014</label>
+          <input type="radio" id="radio2" name="year" value="2013">
+          <label for="radio2">2013</label>
+          <input type="radio" id="radio3" name="year" value="2012">
+          <label for="radio3">2012</label>
+          <input type="radio" id="radio4" name="year" value="2011">
+          <label for="radio4">2011</label>
+          <input type="radio" id="radio5" name="year" value="2010">
+          <label for="radio5">2010</label>
+          <input type="radio" id="radio6" name="year" value="2009">
+          <label for="radio6">2009</label>
+          <input type="radio" id="radio7" name="year" value="2008">
+          <label for="radio7">2008</label>
+          <input type="radio" id="radio8" name="year" value="2007">
+          <label for="radio8">2007</label>
+          <input type="radio" id="radio9" name="year" value="2006">
+          <label for="radio9">2006</label>
+          <input type="radio" id="radio10" name="year" value="2005">
+          <label for="radio10">2005</label>
+        </form>
+      </div>
+    </div>
+      <div class="subcontrol">
+        <label for="type">X Variable: Percentage of</label>
+        <div class="filters">
+          <form id="selecttype">
+            <div class="emp">
+            <input type="radio" id="radio11" name="type" value="HE" checked>
+            <label for="radio11">Householder Employed</label>
+            <input type="radio" id="radio12" name="type" value="BE">
+            <label for="radio12">Both Partners Employed</label>
+            </div>
+            <div class="edu" style="margin-top:5px;">
+            <input type="radio" id="radio13" name="type" value="HB">
+            <label for="radio13">Householder with at least a Bachelor's Degree</label>
+            <input type="radio" id="radio14" name="type" value="BB">
+            <label for="radio14">Both Partners with at least a Bachelor's Degree</label>
+          </form>
+        </div>
+      </div> 
+    </div>
+  </div>
+  <hr>
+  <div class="container">
+    <h3>What we learn from the data</h3>
+    <p>At a first glance, same-sex couples usually have better employment status and education attainment than opposite-sex couples. However, male-male couples always enjoy higher income than female-female couples, even though their education and employment status are close or even the same. Also, in the year 2014, the employment and education of the female-female couple are better than those of opposite-sex couples, but the household income of female-female couples becomes slightly lower than that of opposite-sex couples. Accordingly, it looks like that the more males within a couple, the higher the household income. Although many other factors, such as having kids or not, could affect a family’s employment status and household income, the result indicates that males might enjoy advantages at the workplace.
+
+</p>
+  </div>
+</body>
+<script src="app.js"></script>
+</html>
