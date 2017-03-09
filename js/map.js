@@ -21,7 +21,7 @@ L.tileLayer(osmTiles.url, {
 }).addTo(map);
 
 
-var twitterSearch = "http://faculty.washington.edu/joelross/search-tweets-proxy/?q=lgbt&count=100";
+var twitterSearch = "https://faculty.washington.edu/joelross/search-tweets-proxy/?q=lgbt&count=100";
 
 fetch(twitterSearch)    // fetch data from Twitter Search API
     .then(function(response) {
@@ -51,7 +51,7 @@ function parseTweets(JSobject){    // parse json object to tweet array
 
 function toMap(location, username, time) {  
     if (location.length > 0) {  // check the location input
-        var googleURL = "https://maps.googleapis.com/maps/api/geocode/json?address="+location+"&key=AIzaSyB7x_C7mTCpM5OFCi-eORh8rTzVmW4SezA";
+        var googleURL = "https://maps.googleapis.com/maps/api/geocode/json?address="+location+"&key=AIzaSyAvVzuUOD3iumJ723Ro0qd0w10qmEtQT5Q";
         fetch(googleURL)     // fetch geo-coordinates data from Google GeoCode API
             .then(function(response) {
                 response.user = username;
