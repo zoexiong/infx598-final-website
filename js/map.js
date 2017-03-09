@@ -21,7 +21,7 @@ L.tileLayer(osmTiles.url, {
 }).addTo(map);
 
 
-var twitterSearch = "https://faculty.washington.edu/joelross/search-tweets-proxy/?q=lgbt&count=10";
+var twitterSearch = "https://faculty.washington.edu/joelross/search-tweets-proxy/?q=lgbt&count=100"
 
 fetch(twitterSearch)    // fetch data from Twitter Search API
     .then(function(response) {
@@ -52,11 +52,13 @@ function parseTweets(JSobject){    // parse json object to tweet array
     return objectArray;
 };
 
+
 function toMap(TweetArray) {
     TweetArray.forEach(function(tweet) {
         if (tweet.user.location.length > 0) {
             var googleURL = "https://maps.googleapis.com/maps/api/geocode/json?address="+tweet.user.location+"&key=AIzaSyAvVzuUOD3iumJ723Ro0qd0w10qmEtQT5Q";
             fetch(googleURL)     // fetch geo-coordinates data from Google GeoCode API
+
             .then(function(response) {
                 return response.json();
              })
@@ -76,7 +78,7 @@ function toMap(TweetArray) {
                 }, 3000);
             });
         }
-    })
+    });
 }
 
 function addMarker(data) {  // add marker on the map according to the coordinates data
