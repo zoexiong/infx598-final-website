@@ -1,31 +1,46 @@
-/* add style rules here to customize or adjust the MDL styles */
-.mdl-layout {
-/*    background: url("../img/background.jpg") center / cover;*/
+
+
+body{
+	font-family: helvetica;
+	line-height: 2em;
 }
 
-.mdl-layout__header-row {
-    background-color:cadetblue;
+.navbar{
+	width: 100%;
+	margin-bottom: 0;
+	position: fixed;
+	z-index: 2;
+	/*opacity: .8;*/
 }
 
-.mdl-cell .mdl-card {
-    width:100%;
+
+.jumbotron{
+	margin-top: 0;
+	width: 100%;
+	height: 450px;
+	background-image: url(../img/pride.jpg);
+	background-size: cover;
+	background-attachment:fixed;
+	background-position: 0 70%;
+	/*background-repeat: repeat-y;*/
+	color: #424242;
+	/*position: relative;*/
 }
 
-.mdl-card__media img {
-  width:100%;
+.siteinfo{
+	line-height: 1.5em;
 }
 
-.mdl-card__title h2 {
-    color:black;
+.siteinfo a{
+	font-size: 14px;
 }
 
-/*
-* {
-    color:black;
+.row{
+	margin-top: 20px;
 }
 
-.mdl-navigation__link {
-    color:black;
-}
-*/
+
+
+
+
 
