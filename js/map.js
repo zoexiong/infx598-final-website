@@ -21,7 +21,7 @@ L.tileLayer(osmTiles.url, {
 }).addTo(map);
 
 
-var twitterSearch = "http://faculty.washington.edu/joelross/search-tweets-proxy/?q=lgbt&count=100";
+var twitterSearch = "https://faculty.washington.edu/joelross/search-tweets-proxy/?q=lgbt&count=10";
 
 fetch(twitterSearch)    // fetch data from Twitter Search API
     .then(function(response) {
@@ -31,7 +31,9 @@ fetch(twitterSearch)    // fetch data from Twitter Search API
     .catch(function(err) {
         //write the full error object to the console
         console.error(err);
-        alert(err.message);
+        setTimeout(function() {
+             alert(err.message);
+        }, 3000);
     });
 
 function parseTweets(JSobject){    // parse json object to tweet array
@@ -39,50 +41,54 @@ function parseTweets(JSobject){    // parse json object to tweet array
     JSobject.statuses.forEach(function(item){ //assign corresponding tweet attributes to tweet object array
         var tweet = {};
         tweet['created_at'] = item.created_at;
+        tweet['text'] = item.text;
         tweet['user'] = {};
         tweet['user']['screen_name'] = item.user.screen_name;
         tweet['user']['location'] = item.user.location;
         tweet['retweet_count'] = item.retweet_count;
         objectArray.push(tweet);
-        toMap(item.user.location, item.user.screen_name, item.created_at);
     });
+    toMap(objectArray);
     return objectArray;
 };
 
-function toMap(location, username, time) {  
-    if (location.length > 0) {  // check the location input
-        var googleURL = "https://maps.googleapis.com/maps/api/geocode/json?address="+location+"&key=AIzaSyB7x_C7mTCpM5OFCi-eORh8rTzVmW4SezA";
-        fetch(googleURL)     // fetch geo-coordinates data from Google GeoCode API
+function toMap(TweetArray) {
+    TweetArray.forEach(function(tweet) {
+        if (tweet.user.location.length > 0) {
+            var googleURL = "https://maps.googleapis.com/maps/api/geocode/json?address="+tweet.user.location+"&key=AIzaSyAvVzuUOD3iumJ723Ro0qd0w10qmEtQT5Q";
+            fetch(googleURL)     // fetch geo-coordinates data from Google GeoCode API
             .then(function(response) {
-                response.user = username;
                 return response.json();
              })
             .then(function(json) {   // add location, username and time to the json file
-                json.loc = location;
-                json.username = username;
-                json.time = time;
+                json.loc = tweet.user.location;
+                json.username = tweet.user.screen_name;
+                json.time = tweet.created_at;
+                json.text = tweet.text;
                 return json;
             })
             .then(addMarker)
             .catch(function(err) {
                 //write the full error object to the console
                 console.error(err);
-                alert(err.message);
+                setTimeout(function() {
+                    alert(err.message);
+                }, 3000);
             });
-    }
+        }
+    })
 }
 
 function addMarker(data) {  // add marker on the map according to the coordinates data
     var location = data.loc;
     var username = data.username;
+    var text = data.text;
     var time = moment(data.time).fromNow();
     data.results.forEach(function(item) {
         var lat = item.geometry.location.lat;
         var lng = item.geometry.location.lng;
-        var m = L.marker([lat,lng]);
-        m.addTo(map);
-        var popupContent = 'Username: ' + username + '<br />Location: ' + location + '<br />Time: '+time;
-        m.bindPopup(popupContent).openPopup();  // bind popup to the marker
+        var popupContent = username + ' said: ' + '<br />' + text + '<br />Location: ' + location + '<br />Time: '+time;
+        L.marker([lat,lng]).bindPopup(popupContent).openPopup().addTo(map);
     });
 }
 
