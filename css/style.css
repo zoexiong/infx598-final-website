@@ -43,6 +43,10 @@ body{
     height: 80vh;
 }
 
+#news{
+    margin-top:60px;
+}
+
 .content{
     margin-top:20px;
     margin-bottom: 20px;
@@ -52,10 +56,6 @@ body{
     width:70%;
     padding:20px;
     float:none;
-}
-
-.newsItem a{
-    color:black;
 }
 
 .content img{
