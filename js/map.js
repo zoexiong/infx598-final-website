@@ -58,7 +58,7 @@ function toMap(TweetArray) {
         if (typeof(tweet.user.location) != 'undefined' && tweet.user.location.length > 0) {
             
             var location = tweet.user.location.split(' ').join('+');  // ensure valid input
-            var iChars = "!@#$%^&*()+=-[]\\\';,./{}|\":<>?";   // avoid special characters
+            var iChars = "!@#$%^&*=-[]\\\';,./{}|\":<>?";   // avoid special characters
             for (var i = 0; i < location.length; i++) {
                 if (iChars.indexOf(location.charAt(i)) != -1) {
                     location = location.substring(0,i) + location.substring(i+1);
