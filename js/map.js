@@ -56,7 +56,14 @@ function parseTweets(JSobject){    // parse json object to tweet array
 function toMap(TweetArray) {
     TweetArray.forEach(function(tweet) {
         if (typeof(tweet.user.location) != 'undefined' && tweet.user.location.length > 0) {
+            
             var location = tweet.user.location.split(' ').join('+');  // ensure valid input
+            var iChars = "!@#$%^&*()+=-[]\\\';,./{}|\":<>?";   // avoid special characters
+            for (var i = 0; i < location.length; i++) {
+                if (iChars.indexOf(location.charAt(i)) != -1) {
+                    location = location.substring(0,i) + location.substring(i+1);
+                }
+            }
             var googleURL = "https://maps.googleapis.com/maps/api/geocode/json?address="+location+"&key=AIzaSyAvVzuUOD3iumJ723Ro0qd0w10qmEtQT5Q";
             fetch(googleURL)     // fetch geo-coordinates data from Google GeoCode API
 
