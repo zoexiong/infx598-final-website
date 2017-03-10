@@ -21,7 +21,7 @@ L.tileLayer(osmTiles.url, {
 }).addTo(map);
 
 
-var twitterSearch = "https://faculty.washington.edu/joelross/search-tweets-proxy/?q=lgbt&count=100"
+var twitterSearch = "https://faculty.washington.edu/joelross/search-tweets-proxy/?q=lgbt&count=25"
 
 fetch(twitterSearch)    // fetch data from Twitter Search API
     .then(function(response) {
@@ -64,7 +64,8 @@ function toMap(TweetArray) {
                     location = location.substring(0,i) + location.substring(i+1);
                 }
             }
-            var googleURL = "https://maps.googleapis.com/maps/api/geocode/json?address="+location+"&key=AIzaSyAvVzuUOD3iumJ723Ro0qd0w10qmEtQT5Q";
+            // API key AIzaSyAvVzuUOD3iumJ723Ro0qd0w10qmEtQT5Q or ....
+            var googleURL = "https://maps.googleapis.com/maps/api/geocode/json?address="+location+"&key=AIzaSyDJxQZpdeujZ9BR5Y_G7pV_h0XRfLc-cf8";
             fetch(googleURL)     // fetch geo-coordinates data from Google GeoCode API
 
             .then(function(response) {
