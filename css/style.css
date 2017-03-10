@@ -43,8 +43,31 @@ body{
     height: 80vh;
 }
 
+.content{
+    margin-top:20px;
+    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #e7e7e7;
+    width:70%;
+    padding:20px;
+    float:none;
+}
 
+.newsItem a{
+    color:black;
+}
 
+.content img{
+    float:left;
+    margin-top:20px;
+    margin-right:30px;   
+}
 
+.content span{
+    color:blue;
+}
 
-
+#footnote{
+text-align: center;
+}
