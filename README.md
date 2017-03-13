@@ -8,7 +8,7 @@
 https://zoexiong.github.io/infx598-final-website/
 
 ##Describes what you built:
-* A site about **LGBTQ** that provides related **news** and recent **social media postings**.  
-* We use **api** from [**twitter**](https://twitter.com) and other sites to gather data and display them on our website.
-* News and postings we fetch will be the latest and it updates periodically depends on the api available.
-
+####We curated LGBTQ related information to let people learn more about this community. 
+* We use **API** from [**twitter**](https://twitter.com) to gather data and display latest tweets about LGBTQ on our map. (We use map framework provided by [**OpenStreetMap**](https://www.openstreetmap.org/))
+* We made an **interactive visualization** for the **socioeconomic characteristics** of same-sex couples and opposite-sex couples in the United States. It intends to explore how couples’ sexual orientation, education, and employment would impact their household income.
+* A dynamic news page featuring latest **LGBTQ related news**. News is fetched from different sites using [**bing.com**](https:bing.com) news search API.
