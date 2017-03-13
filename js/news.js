@@ -45,6 +45,7 @@ function addNews(newsObject){
     contentDiv.appendChild(img)
     //add time
     var span = document.createElement("span");
+    date = date.slice(0,10) + " " + date.slice(11,19)
     span.textContent = date;
     //add title
     var h3 = document.createElement("h3")

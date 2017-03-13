@@ -61,10 +61,10 @@ body{
     margin-bottom: 20px;
     margin-left: auto;
     margin-right: auto;
-    background-color: #e7e7e7;
     width:70%;
     padding:20px;
     float:none;
+    min-width:360px;
 }
 
 .content img{
@@ -80,3 +80,14 @@ body{
 #footnote{
 text-align: center;
 }
+
+@media screen and (max-width: 720px) {
+    
+    h3 {
+    font-size: 20px;
+}
+    .content {
+        width:90%;
+    }
+}
+
